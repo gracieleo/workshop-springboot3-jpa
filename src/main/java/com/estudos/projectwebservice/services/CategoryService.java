@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.estudos.projectwebservice.entities.Category;
 import com.estudos.projectwebservice.repositories.CategoryRepository;
+import com.estudos.projectwebservice.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class CategoryService {
@@ -21,6 +22,6 @@ public class CategoryService {
 	
 	public Category findById(Long id) {
 		Optional<Category> optional = repository.findById(id);
-		return optional.get();		
+		return optional.orElseThrow(() -> new ResourceNotFoundException(id));		
 	}
 }
